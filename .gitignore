@@ -1,0 +1,20 @@
+# Environment and local configuration
+.env
+.env.*
+*.local.php
+
+# Dependencies and caches
+vendor/
+node_modules/
+.cache/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak

@@ -1,0 +1,1154 @@
+/**
+ * Bella Vista Oasis Spa - Luxury Dark Theme Stylesheet
+ * 
+ * Color Palette:
+ * - Obsidian: #101313 (Deepest Background)
+ * - Charcoal: #171A1B (Card / Container Glass)
+ * - Champagne Gold: #D6B77B (Primary Metallic Accent)
+ * - Gold Dark: #C4A265 (Gradient Accent)
+ * - Gold Light: #F4E4BA (Highlight Accent)
+ * - Silver Grey: #9C9A96 (Muted Supporting Text)
+ * - Soft White: #E0E0E0 (Primary Reading Text)
+ *
+ * Typography:
+ * - Headings & Brand: Playfair Display (Serif)
+ * - Body & UI Controls: Inter (Sans-Serif)
+ */
+
+/* ==========================================================================
+   1. CSS Custom Properties / Design Tokens
+   ========================================================================== */
+:root {
+    --bvo-obsidian: #101313;
+    --bvo-obsidian-rgb: 16, 19, 19;
+    --bvo-charcoal: #171A1B;
+    --bvo-charcoal-rgb: 23, 26, 27;
+    --bvo-charcoal-light: #222628;
+    --bvo-charcoal-elevated: #282D2F;
+    
+    --bvo-gold: #D6B77B;
+    --bvo-gold-rgb: 214, 183, 123;
+    --bvo-gold-dark: #C4A265;
+    --bvo-gold-light: #F4E4BA;
+    --bvo-gold-subtle: rgba(214, 183, 123, 0.15);
+    --bvo-gold-glow: rgba(214, 183, 123, 0.35);
+
+    --bvo-silver: #9C9A96;
+    --bvo-silver-dark: #6D6B67;
+    --bvo-silver-light: #C2C0BC;
+    --bvo-text: #E0E0E0;
+    --bvo-text-muted: #8E9192;
+
+    --bvo-success: #2E7D32;
+    --bvo-success-light: #4CAF50;
+    --bvo-warning: #ED6C02;
+    --bvo-danger: #D32F2F;
+    --bvo-danger-light: #EF5350;
+    --bvo-info: #0288D1;
+
+    --bvo-font-heading: 'Playfair Display', Georgia, serif;
+    --bvo-font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+    --bvo-radius-sm: 8px;
+    --bvo-radius-md: 12px;
+    --bvo-radius-lg: 16px;
+    --bvo-radius-xl: 24px;
+    --bvo-radius-pill: 9999px;
+
+    --bvo-glass-bg: rgba(23, 26, 27, 0.82);
+    --bvo-glass-bg-hover: rgba(28, 32, 33, 0.92);
+    --bvo-glass-border: 1px solid rgba(214, 183, 123, 0.18);
+    --bvo-glass-border-hover: 1px solid rgba(214, 183, 123, 0.38);
+    --bvo-glass-blur: blur(14px);
+
+    --bvo-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --bvo-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
+    --bvo-shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.65);
+    --bvo-shadow-gold: 0 4px 20px rgba(214, 183, 123, 0.25);
+    --bvo-shadow-gold-hover: 0 8px 30px rgba(214, 183, 123, 0.45);
+
+    --bvo-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --bvo-transition-fast: all 0.15s ease-in-out;
+}
+
+/* ==========================================================================
+   2. Base Styles & Global Resets
+   ========================================================================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    background-color: var(--bvo-obsidian);
+}
+
+body {
+    background-color: var(--bvo-obsidian);
+    color: var(--bvo-text);
+    font-family: var(--bvo-font-body);
+    font-weight: 400;
+    line-height: 1.65;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0d0f0f;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #2b3032;
+    border-radius: var(--bvo-radius-pill);
+    border: 2px solid #0d0f0f;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--bvo-gold-dark);
+}
+
+/* Selection */
+::selection {
+    background-color: var(--bvo-gold);
+    color: var(--bvo-obsidian);
+}
+
+/* Typography Helpers */
+h1, h2, h3, h4, h5, h6,
+.font-playfair {
+    font-family: var(--bvo-font-heading);
+    color: #FFFFFF;
+    letter-spacing: -0.015em;
+    font-weight: 600;
+}
+
+.font-inter {
+    font-family: var(--bvo-font-body);
+}
+
+.text-gold {
+    color: var(--bvo-gold) !important;
+}
+
+.text-gold-light {
+    color: var(--bvo-gold-light) !important;
+}
+
+.text-gold-muted {
+    color: rgba(214, 183, 123, 0.7) !important;
+}
+
+.text-silver {
+    color: var(--bvo-silver) !important;
+}
+
+.bg-obsidian {
+    background-color: var(--bvo-obsidian) !important;
+}
+
+.bg-charcoal {
+    background-color: var(--bvo-charcoal) !important;
+}
+
+.bg-charcoal-glass {
+    background: var(--bvo-glass-bg) !important;
+    backdrop-filter: var(--bvo-glass-blur);
+    -webkit-backdrop-filter: var(--bvo-glass-blur);
+}
+
+.border-gold-subtle {
+    border-color: var(--bvo-gold-subtle) !important;
+}
+
+.tracking-wide {
+    letter-spacing: 0.08em;
+}
+
+.tracking-wider {
+    letter-spacing: 0.15em;
+}
+
+/* Section Heading Decorator */
+.section-title-wrap {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 2rem;
+}
+
+.section-title {
+    font-size: 2.25rem;
+    font-family: var(--bvo-font-heading);
+    margin-bottom: 0.75rem;
+    color: #FFFFFF;
+}
+
+.section-title-wrap::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--bvo-gold), transparent);
+    margin-top: 0.5rem;
+    border-radius: var(--bvo-radius-pill);
+}
+
+.section-title-center::after {
+    margin-left: auto;
+    margin-right: auto;
+    background: linear-gradient(90deg, transparent, var(--bvo-gold), transparent);
+    width: 90px;
+}
+
+/* ==========================================================================
+   3. Navigation & Header
+   ========================================================================== */
+.luxury-navbar {
+    background: rgba(16, 19, 19, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(214, 183, 123, 0.15);
+    transition: var(--bvo-transition);
+}
+
+.luxury-navbar.scrolled {
+    background: rgba(13, 15, 15, 0.97);
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.brand-crest {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(214, 183, 123, 0.22) 0%, rgba(23, 26, 27, 0.8) 100%);
+    border: 1px solid var(--bvo-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 15px rgba(214, 183, 123, 0.2);
+    transition: var(--bvo-transition);
+}
+
+.navbar-brand:hover .brand-crest {
+    transform: rotate(15deg) scale(1.05);
+    box-shadow: 0 0 22px rgba(214, 183, 123, 0.45);
+}
+
+.brand-name {
+    font-size: 1.25rem;
+    line-height: 1.1;
+}
+
+.brand-sub {
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+}
+
+.luxury-navbar .nav-link {
+    color: var(--bvo-silver);
+    font-weight: 500;
+    font-size: 0.92rem;
+    transition: var(--bvo-transition);
+    position: relative;
+}
+
+.luxury-navbar .nav-link:hover,
+.luxury-navbar .nav-link.active {
+    color: var(--bvo-gold) !important;
+}
+
+.luxury-navbar .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--bvo-gold);
+    transition: var(--bvo-transition);
+    border-radius: var(--bvo-radius-pill);
+}
+
+.luxury-navbar .nav-link:hover::after,
+.luxury-navbar .nav-link.active::after {
+    width: 60%;
+}
+
+.luxury-toggler {
+    background: transparent;
+    outline: none !important;
+}
+
+.luxury-toggler .navbar-toggler-icon {
+    filter: invert(75%) sepia(50%) saturate(400%) hue-rotate(5deg);
+}
+
+/* User Avatar & Dropdowns */
+.avatar-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--bvo-gold), var(--bvo-gold-dark));
+    color: var(--bvo-obsidian);
+    font-weight: 700;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.luxury-dropdown {
+    background: var(--bvo-charcoal) !important;
+    border: 1px solid rgba(214, 183, 123, 0.25) !important;
+    border-radius: var(--bvo-radius-md);
+    box-shadow: var(--bvo-shadow-lg);
+    backdrop-filter: blur(16px);
+    padding: 0.5rem 0;
+}
+
+.luxury-dropdown .dropdown-item {
+    color: var(--bvo-text);
+    font-size: 0.9rem;
+    transition: var(--bvo-transition);
+    padding: 0.6rem 1.25rem;
+}
+
+.luxury-dropdown .dropdown-item:hover {
+    background: rgba(214, 183, 123, 0.12);
+    color: var(--bvo-gold);
+    padding-left: 1.5rem;
+}
+
+/* ==========================================================================
+   4. Buttons & Interactive Elements
+   ========================================================================== */
+.btn-gold {
+    background: linear-gradient(135deg, var(--bvo-gold) 0%, var(--bvo-gold-dark) 100%);
+    color: var(--bvo-obsidian) !important;
+    font-weight: 600;
+    border: none;
+    border-radius: var(--bvo-radius-pill);
+    padding: 0.65rem 1.6rem;
+    transition: var(--bvo-transition);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn-gold::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, var(--bvo-gold-light) 0%, var(--bvo-gold) 100%);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+}
+
+.btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--bvo-shadow-gold-hover);
+    color: #000000 !important;
+}
+
+.btn-gold:hover::before {
+    opacity: 1;
+}
+
+.btn-gold:active {
+    transform: translateY(0);
+}
+
+.btn-outline-gold {
+    background: transparent;
+    color: var(--bvo-gold) !important;
+    border: 1px solid var(--bvo-gold);
+    border-radius: var(--bvo-radius-pill);
+    padding: 0.6rem 1.5rem;
+    font-weight: 500;
+    transition: var(--bvo-transition);
+}
+
+.btn-outline-gold:hover {
+    background: rgba(214, 183, 123, 0.14);
+    color: var(--bvo-gold-light) !important;
+    border-color: var(--bvo-gold-light);
+    box-shadow: 0 0 15px rgba(214, 183, 123, 0.25);
+    transform: translateY(-2px);
+}
+
+.btn-charcoal-glass {
+    background: var(--bvo-glass-bg);
+    border: var(--bvo-glass-border);
+    backdrop-filter: var(--bvo-glass-blur);
+    color: var(--bvo-text);
+    transition: var(--bvo-transition);
+}
+
+.btn-charcoal-glass:hover {
+    background: var(--bvo-glass-bg-hover);
+    border-color: var(--bvo-gold);
+    color: var(--bvo-gold);
+}
+
+.shadow-gold {
+    box-shadow: var(--bvo-shadow-gold);
+}
+
+/* ==========================================================================
+   5. Glassmorphism Cards & Panels
+   ========================================================================== */
+.luxury-card {
+    background: var(--bvo-glass-bg);
+    backdrop-filter: var(--bvo-glass-blur);
+    -webkit-backdrop-filter: var(--bvo-glass-blur);
+    border: var(--bvo-glass-border);
+    border-radius: var(--bvo-radius-lg);
+    box-shadow: var(--bvo-shadow-md);
+    transition: var(--bvo-transition);
+    overflow: hidden;
+    position: relative;
+}
+
+.luxury-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(214, 183, 123, 0.4), transparent);
+}
+
+.luxury-card-hover:hover {
+    transform: translateY(-5px);
+    border-color: rgba(214, 183, 123, 0.45);
+    box-shadow: var(--bvo-shadow-lg), 0 0 25px rgba(214, 183, 123, 0.15);
+}
+
+.card-header-gold {
+    border-bottom: 1px solid rgba(214, 183, 123, 0.2);
+    background: rgba(23, 26, 27, 0.5);
+    padding: 1.25rem 1.5rem;
+}
+
+/* Service Presentation Cards */
+.service-card {
+    border-radius: var(--bvo-radius-lg);
+    overflow: hidden;
+    background: var(--bvo-charcoal);
+    border: 1px solid rgba(214, 183, 123, 0.15);
+    transition: var(--bvo-transition);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--bvo-gold);
+    box-shadow: var(--bvo-shadow-lg), 0 0 30px rgba(214, 183, 123, 0.2);
+}
+
+.service-card-img-wrap {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+}
+
+.service-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.service-card:hover .service-card-img {
+    transform: scale(1.08);
+}
+
+.service-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(16, 19, 19, 0.1) 0%, rgba(16, 19, 19, 0.95) 100%);
+    display: flex;
+    align-items: flex-end;
+    padding: 1.25rem;
+}
+
+.service-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(16, 19, 19, 0.85);
+    border: 1px solid var(--bvo-gold);
+    color: var(--bvo-gold);
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--bvo-radius-pill);
+    backdrop-filter: blur(8px);
+}
+
+/* ==========================================================================
+   6. Form Controls & Inputs
+   ========================================================================== */
+.form-control,
+.form-select {
+    background-color: rgba(23, 26, 27, 0.95) !important;
+    border: 1px solid rgba(214, 183, 123, 0.25) !important;
+    color: #FFFFFF !important;
+    border-radius: var(--bvo-radius-md);
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    font-family: var(--bvo-font-body);
+    transition: var(--bvo-transition);
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: #1a1e20 !important;
+    border-color: var(--bvo-gold) !important;
+    box-shadow: 0 0 0 0.25rem rgba(214, 183, 123, 0.25) !important;
+    outline: none;
+    color: #FFFFFF !important;
+}
+
+.form-control::placeholder {
+    color: var(--bvo-silver-dark);
+}
+
+.form-label {
+    color: var(--bvo-silver-light);
+    font-size: 0.88rem;
+    font-weight: 500;
+    margin-bottom: 0.45rem;
+}
+
+.input-group-text {
+    background-color: var(--bvo-charcoal-light) !important;
+    border: 1px solid rgba(214, 183, 123, 0.25) !important;
+    color: var(--bvo-gold) !important;
+}
+
+.form-check-input {
+    background-color: var(--bvo-charcoal) !important;
+    border: 1px solid var(--bvo-gold) !important;
+}
+
+.form-check-input:checked {
+    background-color: var(--bvo-gold) !important;
+    border-color: var(--bvo-gold) !important;
+}
+
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.2rem rgba(214, 183, 123, 0.25) !important;
+}
+
+/* ==========================================================================
+   7. Tables & Grids
+   ========================================================================== */
+.luxury-table-wrap {
+    border: 1px solid rgba(214, 183, 123, 0.18);
+    border-radius: var(--bvo-radius-lg);
+    overflow: hidden;
+    background: var(--bvo-glass-bg);
+    box-shadow: var(--bvo-shadow-md);
+}
+
+.luxury-table {
+    margin-bottom: 0;
+    width: 100%;
+    color: var(--bvo-text);
+    background: transparent;
+}
+
+.luxury-table th {
+    background-color: rgba(16, 19, 19, 0.9) !important;
+    color: var(--bvo-gold) !important;
+    font-family: var(--bvo-font-heading);
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    padding: 1.1rem 1rem;
+    border-bottom: 2px solid rgba(214, 183, 123, 0.3) !important;
+    vertical-align: middle;
+}
+
+.luxury-table td {
+    background-color: transparent !important;
+    color: var(--bvo-text) !important;
+    padding: 1rem;
+    vertical-align: middle;
+    border-bottom: 1px solid rgba(214, 183, 123, 0.08) !important;
+    font-size: 0.9rem;
+    transition: var(--bvo-transition);
+}
+
+.luxury-table tbody tr:hover td {
+    background-color: rgba(214, 183, 123, 0.06) !important;
+    color: #FFFFFF !important;
+}
+
+/* ==========================================================================
+   8. Status Badges & Indicators
+   ========================================================================== */
+.badge-status {
+    padding: 0.4rem 0.85rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    border-radius: var(--bvo-radius-pill);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+/* Status variants */
+.badge-status-pending {
+    background-color: rgba(214, 183, 123, 0.15);
+    color: var(--bvo-gold);
+    border: 1px solid var(--bvo-gold);
+}
+
+.badge-status-confirmed {
+    background-color: rgba(46, 125, 50, 0.18);
+    color: #81C784;
+    border: 1px solid #4CAF50;
+}
+
+.badge-status-in_progress {
+    background-color: rgba(2, 136, 209, 0.18);
+    color: #4FC3F7;
+    border: 1px solid #0288D1;
+}
+
+.badge-status-completed {
+    background-color: rgba(46, 125, 50, 0.22);
+    color: #A5D6A7;
+    border: 1px solid #81C784;
+}
+
+.badge-status-cancelled {
+    background-color: rgba(211, 47, 47, 0.18);
+    color: #E57373;
+    border: 1px solid #EF5350;
+}
+
+.badge-status-no_show {
+    background-color: rgba(109, 107, 103, 0.25);
+    color: #BDBDBD;
+    border: 1px solid #757575;
+}
+
+.badge-gold-outline {
+    background: transparent;
+    color: var(--bvo-gold);
+    border: 1px solid rgba(214, 183, 123, 0.4);
+    border-radius: var(--bvo-radius-pill);
+    padding: 0.25rem 0.65rem;
+    font-size: 0.72rem;
+}
+
+/* ==========================================================================
+   9. Hero Section & Showcases
+   ========================================================================== */
+.luxury-hero {
+    position: relative;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    background: radial-gradient(circle at 70% 30%, rgba(214, 183, 123, 0.08) 0%, transparent 60%),
+                linear-gradient(180deg, var(--bvo-obsidian) 0%, #141718 100%);
+    overflow: hidden;
+    padding: 6rem 0;
+}
+
+.luxury-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 80%, rgba(196, 162, 101, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.hero-headline {
+    font-size: clamp(2.5rem, 5vw, 4.2rem);
+    line-height: 1.15;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #FFFFFF;
+}
+
+.hero-tagline {
+    font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+    color: var(--bvo-silver-light);
+    max-width: 650px;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+}
+
+.hero-visual-frame {
+    position: relative;
+    border-radius: var(--bvo-radius-xl);
+    padding: 0.75rem;
+    background: linear-gradient(135deg, rgba(214, 183, 123, 0.3), rgba(23, 26, 27, 0.8));
+    box-shadow: var(--bvo-shadow-lg), 0 0 50px rgba(214, 183, 123, 0.15);
+}
+
+.hero-visual-inner {
+    border-radius: calc(var(--bvo-radius-xl) - 4px);
+    overflow: hidden;
+    position: relative;
+    height: 480px;
+}
+
+.hero-visual-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ==========================================================================
+   10. Modals & Dialogs
+   ========================================================================== */
+.modal-content.luxury-modal {
+    background: rgba(23, 26, 27, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(214, 183, 123, 0.3);
+    border-radius: var(--bvo-radius-lg);
+    box-shadow: var(--bvo-shadow-lg), 0 0 40px rgba(0, 0, 0, 0.8);
+    color: var(--bvo-text);
+}
+
+.modal-header.luxury-modal-header {
+    border-bottom: 1px solid rgba(214, 183, 123, 0.18);
+    padding: 1.25rem 1.75rem;
+}
+
+.modal-footer.luxury-modal-footer {
+    border-top: 1px solid rgba(214, 183, 123, 0.18);
+    padding: 1.25rem 1.75rem;
+}
+
+.btn-close-gold {
+    filter: invert(80%) sepia(40%) saturate(400%) hue-rotate(5deg);
+    opacity: 0.75;
+    transition: var(--bvo-transition);
+}
+
+.btn-close-gold:hover {
+    opacity: 1;
+    transform: rotate(90deg);
+}
+
+/* ==========================================================================
+   11. Toast Notifications
+   ========================================================================== */
+.luxury-toast {
+    background: rgba(23, 26, 27, 0.96) !important;
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(214, 183, 123, 0.25) !important;
+    border-left: 5px solid var(--bvo-gold) !important;
+    border-radius: var(--bvo-radius-md) !important;
+    box-shadow: var(--bvo-shadow-lg) !important;
+    color: var(--bvo-text) !important;
+    min-width: 320px;
+}
+
+.luxury-toast.toast-success {
+    border-left-color: #4CAF50 !important;
+}
+
+.luxury-toast.toast-danger {
+    border-left-color: #EF5350 !important;
+}
+
+.luxury-toast.toast-warning {
+    border-left-color: #FFA726 !important;
+}
+
+.luxury-toast.toast-info {
+    border-left-color: #29B6F6 !important;
+}
+
+.luxury-toast .toast-header {
+    background: rgba(16, 19, 19, 0.6) !important;
+    border-bottom: 1px solid rgba(214, 183, 123, 0.12) !important;
+    color: var(--bvo-gold) !important;
+    font-family: var(--bvo-font-heading);
+}
+
+/* ==========================================================================
+   12. Dashboard Stat Cards & Charts
+   ========================================================================== */
+.stat-card {
+    background: var(--bvo-glass-bg);
+    backdrop-filter: var(--bvo-glass-blur);
+    border: var(--bvo-glass-border);
+    border-radius: var(--bvo-radius-lg);
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: var(--bvo-transition);
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(214, 183, 123, 0.4);
+    box-shadow: var(--bvo-shadow-md);
+}
+
+.stat-card-icon-bg {
+    position: absolute;
+    right: -10px;
+    bottom: -10px;
+    font-size: 5rem;
+    color: rgba(214, 183, 123, 0.05);
+    pointer-events: none;
+    transition: var(--bvo-transition);
+}
+
+.stat-card:hover .stat-card-icon-bg {
+    color: rgba(214, 183, 123, 0.1);
+    transform: scale(1.1);
+}
+
+.stat-card-number {
+    font-family: var(--bvo-font-heading);
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    line-height: 1.2;
+}
+
+.stat-card-label {
+    color: var(--bvo-silver);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+}
+
+.chart-container-card {
+    background: var(--bvo-glass-bg);
+    backdrop-filter: var(--bvo-glass-blur);
+    border: var(--bvo-glass-border);
+    border-radius: var(--bvo-radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--bvo-shadow-md);
+}
+
+/* ==========================================================================
+   13. Calendar & Scheduler Styling
+   ========================================================================== */
+.calendar-card {
+    background: var(--bvo-charcoal);
+    border: 1px solid rgba(214, 183, 123, 0.2);
+    border-radius: var(--bvo-radius-lg);
+    padding: 1.5rem;
+}
+
+.time-slot-btn {
+    background: rgba(23, 26, 27, 0.8);
+    border: 1px solid rgba(214, 183, 123, 0.25);
+    color: var(--bvo-text);
+    border-radius: var(--bvo-radius-md);
+    padding: 0.65rem 1rem;
+    font-size: 0.88rem;
+    transition: var(--bvo-transition);
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+}
+
+.time-slot-btn:hover:not(:disabled) {
+    background: rgba(214, 183, 123, 0.15);
+    border-color: var(--bvo-gold);
+    color: var(--bvo-gold);
+    transform: translateY(-2px);
+}
+
+.time-slot-btn.selected {
+    background: linear-gradient(135deg, var(--bvo-gold), var(--bvo-gold-dark)) !important;
+    color: var(--bvo-obsidian) !important;
+    font-weight: 700;
+    border-color: var(--bvo-gold) !important;
+    box-shadow: var(--bvo-shadow-gold);
+}
+
+.time-slot-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* ==========================================================================
+   14. Admin Sidebar & Internal Layouts
+   ========================================================================== */
+.admin-sidebar {
+    background: var(--bvo-charcoal);
+    border-right: 1px solid rgba(214, 183, 123, 0.15);
+    min-height: calc(100vh - 80px);
+    padding: 1.5rem 1rem;
+}
+
+.admin-nav-item {
+    color: var(--bvo-silver);
+    font-size: 0.92rem;
+    padding: 0.75rem 1.1rem;
+    border-radius: var(--bvo-radius-md);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    transition: var(--bvo-transition);
+    margin-bottom: 0.35rem;
+}
+
+.admin-nav-item:hover,
+.admin-nav-item.active {
+    background: rgba(214, 183, 123, 0.14);
+    color: var(--bvo-gold);
+    border-left: 3px solid var(--bvo-gold);
+}
+
+.admin-nav-item i {
+    width: 20px;
+    text-align: center;
+}
+
+/* ==========================================================================
+   15. Rating Stars, Timeline & Reviews
+   ========================================================================== */
+.rating-stars {
+    color: var(--bvo-gold);
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+}
+
+.rating-stars-interactive {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.rating-stars-interactive .fa-star {
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.rating-stars-interactive .fa-star:hover {
+    transform: scale(1.2);
+}
+
+.luxury-timeline {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.luxury-timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 5px;
+    bottom: 5px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--bvo-gold), transparent);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -2rem;
+    top: 4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--bvo-obsidian);
+    border: 2px solid var(--bvo-gold);
+    box-shadow: 0 0 10px rgba(214, 183, 123, 0.4);
+}
+
+/* ==========================================================================
+   16. Pagination & Breadcrumbs
+   ========================================================================== */
+.pagination.luxury-pagination .page-link {
+    background: var(--bvo-charcoal);
+    border: 1px solid rgba(214, 183, 123, 0.2);
+    color: var(--bvo-silver);
+    padding: 0.5rem 0.9rem;
+    transition: var(--bvo-transition);
+}
+
+.pagination.luxury-pagination .page-link:hover {
+    background: rgba(214, 183, 123, 0.15);
+    color: var(--bvo-gold);
+    border-color: var(--bvo-gold);
+}
+
+.pagination.luxury-pagination .page-item.active .page-link {
+    background: var(--bvo-gold);
+    color: var(--bvo-obsidian);
+    font-weight: 700;
+    border-color: var(--bvo-gold);
+}
+
+/* ==========================================================================
+   17. Loading Spinner & Overlays
+   ========================================================================== */
+.loading-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(16, 19, 19, 0.88);
+    backdrop-filter: blur(10px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spinner-gold {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(214, 183, 123, 0.2);
+    border-top: 3px solid var(--bvo-gold);
+    border-radius: 50%;
+    animation: bvo-spin 0.9s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@keyframes bvo-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   18. Luxury Alerts
+   ========================================================================== */
+.luxury-alert {
+    background: rgba(23, 26, 27, 0.92);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(214, 183, 123, 0.2);
+    border-radius: var(--bvo-radius-md);
+    color: var(--bvo-text);
+    padding: 1rem 1.25rem;
+    box-shadow: var(--bvo-shadow-sm);
+}
+
+.luxury-alert.alert-success {
+    border-left: 4px solid #4CAF50;
+}
+
+.luxury-alert.alert-danger {
+    border-left: 4px solid #EF5350;
+}
+
+.luxury-alert.alert-warning {
+    border-left: 4px solid #FFA726;
+}
+
+.luxury-alert.alert-gold,
+.luxury-alert.alert-info {
+    border-left: 4px solid var(--bvo-gold);
+}
+
+/* ==========================================================================
+   19. Social Buttons & Footer
+   ========================================================================== */
+.luxury-footer {
+    background-color: #0c0e0e;
+}
+
+.footer-link {
+    color: var(--bvo-silver);
+    transition: var(--bvo-transition);
+}
+
+.footer-link:hover {
+    color: var(--bvo-gold) !important;
+    padding-left: 4px;
+}
+
+.social-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(214, 183, 123, 0.25);
+    background: rgba(23, 26, 27, 0.8);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    transition: var(--bvo-transition);
+}
+
+.social-btn:hover {
+    background: var(--bvo-gold);
+    color: var(--bvo-obsidian) !important;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(214, 183, 123, 0.35);
+}
+
+/* ==========================================================================
+   20. Responsive Media Queries
+   ========================================================================== */
+@media (max-width: 991.98px) {
+    .luxury-navbar .navbar-collapse {
+        background: rgba(16, 19, 19, 0.98);
+        border: 1px solid rgba(214, 183, 123, 0.2);
+        border-radius: var(--bvo-radius-lg);
+        padding: 1.5rem;
+        margin-top: 1rem;
+        box-shadow: var(--bvo-shadow-lg);
+    }
+    
+    .admin-sidebar {
+        min-height: auto;
+        border-right: none;
+        border-bottom: 1px solid rgba(214, 183, 123, 0.15);
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-headline {
+        font-size: 2.5rem;
+    }
+
+    .hero-visual-frame {
+        margin-top: 2.5rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .section-title {
+        font-size: 1.75rem;
+    }
+
+    .btn-gold,
+    .btn-outline-gold {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-card-number {
+        font-size: 1.8rem;
+    }
+}
