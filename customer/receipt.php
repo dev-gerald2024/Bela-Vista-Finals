@@ -3,10 +3,6 @@
  * Bella Vista Oasis Spa - Official Electronic Sanctuary Receipt
  */
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
 require_once '../config/app.php';
 require_once '../config/database.php';
 require_once '../includes/functions.php';
@@ -27,7 +23,7 @@ $receiptNumber = trim($_GET['receipt_number'] ?? '');
 
 if ($paymentId <= 0 && empty($receiptNumber)) {
     flash_message('danger', 'Receipt identifier is required.');
-    redirect('payments.php');
+    redirect('customer/payments.php');
 }
 
 // Fetch receipt details
@@ -73,7 +69,7 @@ $rec = $stReceipt->fetch();
 
 if (!$rec) {
     flash_message('danger', 'Receipt not found or you are not authorized to view it.');
-    redirect('payments.php');
+    redirect('customer/payments.php');
 }
 
 // Calculate total paid across all payments for this appointment to determine remaining balance

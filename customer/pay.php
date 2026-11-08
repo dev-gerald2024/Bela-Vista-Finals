@@ -3,10 +3,6 @@
  * Bella Vista Oasis Spa - Simulated Payment Checkout
  */
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
 require_once '../config/app.php';
 require_once '../config/database.php';
 require_once '../includes/functions.php';
@@ -25,7 +21,7 @@ $customerId = (int)($_SESSION['customer_id'] ?? 0);
 $appointmentId = (int)($_GET['appointment_id'] ?? 0);
 if ($appointmentId <= 0) {
     flash_message('danger', 'Please choose an appointment to settle.');
-    redirect('appointments.php');
+    redirect('customer/appointments.php');
 }
 
 // Fetch Appointment
@@ -45,7 +41,7 @@ $appt = $stAppt->fetch();
 
 if (!$appt) {
     flash_message('danger', 'Appointment not found or unauthorized.');
-    redirect('appointments.php');
+    redirect('customer/appointments.php');
 }
 
 // Calculate already paid amounts

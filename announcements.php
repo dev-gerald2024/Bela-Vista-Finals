@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once 'config/app.php';
 require_once 'config/database.php';
 require_once 'includes/functions.php';
@@ -8,6 +7,7 @@ require_once 'includes/header.php';
 
 // Fetch active promotions
 $promotions = [];
+$pdo = null;
 try {
     $pdo = get_db_connection();
     $stmt = $pdo->query("SELECT * FROM promotions WHERE is_active = 1 AND end_date >= CURDATE() ORDER BY start_date DESC");
@@ -17,6 +17,7 @@ try {
 // Fetch announcements from website_contents
 $announcements_content = [];
 try {
+    if (!$pdo) { throw new Exception('No DB'); }
     $stmt = $pdo->query("SELECT * FROM website_contents WHERE section_key LIKE 'announcement_%' AND is_published = 1 ORDER BY updated_at DESC");
     $announcements_content = $stmt->fetchAll();
 } catch (Exception $e) {}

@@ -3,9 +3,6 @@
  * Bella Vista Oasis Spa - Privacy Policy
  * In compliance with RA 10173 (Philippine Data Privacy Act of 2012)
  */
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 require_once __DIR__ . '/config/app.php';
 require_once __DIR__ . '/includes/functions.php';
 

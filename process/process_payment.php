@@ -7,10 +7,6 @@
  * and logs security audit trail.
  */
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
 require_once __DIR__ . '/../config/app.php';
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../includes/functions.php';
@@ -30,7 +26,7 @@ $customerId = (int)($_SESSION['customer_id'] ?? 0);
 $csrfToken = $_POST['csrf_token'] ?? null;
 if (!validate_csrf_token($csrfToken)) {
     flash_message('danger', 'Security token invalid or expired. Please try again.');
-    redirect('payments.php');
+    redirect('customer/payments.php');
 }
 
 $appointmentId = (int)($_POST['appointment_id'] ?? 0);
@@ -40,7 +36,7 @@ $amount = (float)($_POST['amount'] ?? 0.00);
 
 if ($appointmentId <= 0 || $paymentMethodId <= 0 || $amount <= 0) {
     flash_message('danger', 'Invalid payment submission parameters.');
-    redirect('payments.php');
+    redirect('customer/payments.php');
 }
 
 // 1. Fetch appointment & verify ownership
@@ -52,7 +48,7 @@ $appt = $stAppt->fetch();
 
 if (!$appt) {
     flash_message('danger', 'Appointment not found or unauthorized.');
-    redirect('payments.php');
+    redirect('customer/payments.php');
 }
 
 // 2. Verify payment method is active
@@ -62,7 +58,7 @@ $method = $stMethod->fetch();
 
 if (!$method) {
     flash_message('danger', 'Selected payment method is currently disabled.');
-    redirect("pay.php?appointment_id={$appointmentId}");
+    redirect("customer/pay.php?appointment_id={$appointmentId}");
 }
 
 // 3. Process Payment atomically
@@ -153,7 +149,7 @@ try {
     $pdo->commit();
 
     flash_message('success', "Payment successfully processed! Receipt #{$receiptNumber} has been issued.");
-    redirect("receipt.php?payment_id={$paymentId}");
+    redirect("customer/receipt.php?payment_id={$paymentId}");
 
 } catch (Exception $e) {
     if ($pdo->inTransaction()) {
@@ -161,5 +157,5 @@ try {
     }
     error_log("Payment Process Exception: " . $e->getMessage());
     flash_message('danger', 'Unable to record payment transaction. Please try again.');
-    redirect("pay.php?appointment_id={$appointmentId}");
+    redirect("customer/pay.php?appointment_id={$appointmentId}");
 }

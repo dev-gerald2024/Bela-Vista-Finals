@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once '../config/app.php';
 require_once '../config/database.php';
 require_once '../includes/functions.php';
@@ -8,7 +7,7 @@ $page_title = 'My Reviews';
 $pdo = get_db_connection();
 $user_id = $_SESSION['user_id'];
 
-$stmt = $pdo->prepare("SELECT c.id FROM customers WHERE user_id = ?");
+$stmt = $pdo->prepare("SELECT id FROM customers WHERE user_id = ?");
 $stmt->execute([$user_id]);
 $customer_id = $stmt->fetch()['id'];
 

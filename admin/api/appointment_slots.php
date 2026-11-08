@@ -3,9 +3,6 @@
  * Bella Vista Oasis Spa - Appointment Dynamic API Helper
  * Provides AJAX support for customer autocomplete, dynamic slots, rooms, and pricing.
  */
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 require_once __DIR__ . '/../../config/app.php';
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/../../includes/functions.php';
